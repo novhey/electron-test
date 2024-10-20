@@ -7,6 +7,16 @@
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "build": {
+    "appId": "com.oxfordlearnersbookshelf.ods",
+    "mac": {
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "target": "dmg"
+    }
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
