@@ -43,19 +43,19 @@ jobs:
       # 앱 서명
       - name: Sign the app
         run: |
-          codesign --deep --force --verbose --sign "3rd Party Mac Developer Application: HyeJoo Jun (X57DM4D9CF)" "dist/mac/MyElectronApp.app"
+          codesign --deep --force --verbose --sign "3rd Party Mac Developer Application: HyeJoo Jun (X57DM4D9CF)" "dist/mac-arm64/my-electron-app.app"
 
       # 서명 확인
       - name: Verify signature
         run: |
-          codesign --verify --deep --verbose "dist/mac/MyElectronApp.app"
+          codesign --verify --deep --verbose "dist/mac-arm64/my-electron-app.app"
 
       # 앱 공증 요청
       - name: Notarize the app
         run: |
-          xcrun altool --notarize-app -f "dist/mac/MyElectronApp.zip" --primary-bundle-id "com.oxfordlearnersbookshelf.ods" -u "${{ secrets.APPLE_ID }}" -p "${{ secrets.APPLE_APP_PASSWORD }}"
+          xcrun altool --notarize-app -f "dist/mac-arm64/my-electron-app.zip" --primary-bundle-id "com.oxfordlearnersbookshelf.ods" -u "${{ secrets.APPLE_ID }}" -p "${{ secrets.APPLE_APP_PASSWORD }}"
 
       # 스테이플링
       - name: Staple the app
         run: |
-          xcrun stapler staple "dist/mac/MyElectronApp.app"
+          xcrun stapler staple "dist/mac-arm64/my-electron-app.app"
