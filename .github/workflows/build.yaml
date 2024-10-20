@@ -32,9 +32,9 @@ jobs:
       # 인증서 설정
       - name: Decode and install Apple certificate
         run: |
-          echo "$APPLE_CERTIFICATE" | base64 --decode > certificate.p12
+          echo "${{ secrets.APPLE_CERTIFICATE }}" | base64 --decode > certificate.p12
           security create-keychain -p "" build.keychain
-          security import certificate.p12 -k build.keychain -P "$APPLE_CERTIFICATE_PASSWORD" -T /usr/bin/codesign
+          security import certificate.p12 -k build.keychain -P "${{ secrets.APPLE_CERTIFICATE_PASSWORD }}" -T /usr/bin/codesign
           security list-keychains -s build.keychain
           security default-keychain -s build.keychain
           security unlock-keychain -p "" build.keychain
@@ -53,7 +53,7 @@ jobs:
       # 앱 공증 요청
       - name: Notarize the app
         run: |
-          xcrun altool --notarize-app -f "dist/mac/MyElectronApp.zip" --primary-bundle-id "com.oxfordlearnersbookshelf.ods" -u "$APPLE_ID" -p "$APPLE_APP_PASSWORD"
+          xcrun altool --notarize-app -f "dist/mac/MyElectronApp.zip" --primary-bundle-id "com.oxfordlearnersbookshelf.ods" -u "${{ secrets.APPLE_ID }}" -p "${{ secrets.APPLE_APP_PASSWORD }}"
 
       # 스테이플링
       - name: Staple the app
