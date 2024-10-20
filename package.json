@@ -5,16 +5,46 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "build": "electron-builder",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "build": {
     "appId": "com.oxfordlearnersbookshelf.ods",
     "mac": {
+      "category": "public.app-category.utilities",
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
       "entitlements": "build/entitlements.mac.plist",
       "entitlementsInherit": "build/entitlements.mac.plist",
       "target": "dmg"
+    },
+    "dmg": {
+      "icon": "build/icon.icns",
+      "iconSize": 80,
+      "contents": [
+        {
+          "x": 200,
+          "y": 350
+        },
+        {
+          "x": 500,
+          "y": 350,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 1000,
+          "y": 410,
+          "type": "file",
+          "name": ".background"
+        },
+        {
+          "x": 1000,
+          "y": 420,
+          "type": "file",
+          "name": ".fseventsd"
+        }
+      ]
     }
   },
   "author": "",
