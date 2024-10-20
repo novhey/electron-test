@@ -53,7 +53,9 @@ jobs:
       # 앱 공증 요청
       - name: Notarize the app
         run: |
-          xcrun altool --notarize-app -f "dist/mac-arm64/my-electron-app.zip" --primary-bundle-id "com.oxfordlearnersbookshelf.ods" -u "${{ secrets.APPLE_ID }}" -p "${{ secrets.APPLE_APP_PASSWORD }}"
+          cd dist/mac-arm64
+          zip -r my-electron-app.zip my-electron-app.app
+          xcrun notarytool submit "my-electron-app.zip" --keychain-profile "myKeychainProfile" --wait
 
       # 스테이플링
       - name: Staple the app
