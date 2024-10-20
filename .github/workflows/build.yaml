@@ -20,6 +20,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "18"
+          registry-url: "https://npm.pkg.github.com"
+          token: ${{ secrets.GH_TOKEN }}
 
       # Electron 앱 빌드
       - name: Install dependencies and build
