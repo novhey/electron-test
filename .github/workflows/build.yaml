@@ -53,7 +53,7 @@ jobs:
       # Notarytool에 자격 증명 저장
       - name: Store Notarization Credentials
         run: |
-          xcrun notarytool store-credentials "myKeychainProfile" --apple-id "${{ secrets.APPLE_ID }}" --password "${{ secrets.APPLE_APP_PASSWORD }}"
+          xcrun notarytool store-credentials "myKeychainProfile" --apple-id "${{ secrets.APPLE_ID }}" --password "${{ secrets.APPLE_APP_PASSWORD }} --team-id "${{ secrets.APPLE_TEAM_ID }}"
 
       # 앱 공증 요청
       - name: Notarize the app
